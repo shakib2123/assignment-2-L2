@@ -55,9 +55,30 @@ const getSingleProduct = async (req: Request, res: Response) => {
     });
   }
 };
+const updateProduct = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.productId;
+    const updatedData = req.body;
+    const zodParsedData = productValidationSchema.parse(updatedData);
+    const result = await ProductServices.updateProductFromDB(id, zodParsedData);
+
+    res.status(200).json({
+      success: true,
+      message: 'Product updated successfully!',
+      data: result,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.issues[0].message || 'Something went wrong',
+      error: error,
+    });
+  }
+};
 
 export const ProductControllers = {
   createProduct,
   getAllProducts,
   getSingleProduct,
+  updateProduct,
 };
