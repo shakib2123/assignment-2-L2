@@ -22,15 +22,18 @@ const productSchema = new Schema<TProduct>({
     type: [String],
     required: true,
   },
-  variants: {
-    type: [
-      {
+  variants: [
+    {
+      type: {
         type: String,
-        value: String,
+        required: true,
       },
-    ],
-    required: true,
-  },
+      value: {
+        type: String,
+        required: true,
+      },
+    },
+  ],
   inventory: {
     type: {
       quantity: Number,
