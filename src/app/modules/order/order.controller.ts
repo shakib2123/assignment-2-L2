@@ -3,10 +3,12 @@ import { OrderServices } from './order.service';
 import { orderValidationSchema } from './order.validation';
 import { Product } from '../product/product.model';
 
+//Create a new order in the database
 const createOrder = async (req: Request, res: Response) => {
   try {
     const payload = req.body;
 
+    // Find the product with the given id
     const product = await Product.findById(payload.productId);
     if (!product) {
       return res.status(404).json({
@@ -29,7 +31,10 @@ const createOrder = async (req: Request, res: Response) => {
     product.inventory.inStock = product.inventory.quantity > 0;
     await product.save();
 
+    // Validate the order data using Zod
     const zodParsedData = orderValidationSchema.parse(payload);
+
+    // Create the order in the database
     const result = await OrderServices.createOrderIntoDB(zodParsedData);
 
     res.status(200).json({
@@ -54,14 +59,19 @@ const createOrder = async (req: Request, res: Response) => {
   }
 };
 
+//Fetch all orders from the database
 const getAllOrders = async (req: Request, res: Response) => {
   try {
-    const email = req.query.email;
+    // The query to filter orders by email
     let query: any = {};
 
+    //The email to filter orders by
+    const email = req.query.email;
     if (email) {
       query = { email };
     }
+
+    // Fetch all orders from the database
     const result = await OrderServices.getAllOrdersFromDB(query);
 
     if (!result || result.length === 0) {
