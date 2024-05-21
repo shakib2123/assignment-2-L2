@@ -5,7 +5,12 @@ const createOrderIntoDB = async (payload: TOrder) => {
   const result = await Order.create(payload);
   return result;
 };
+const getAllOrdersFromDB = async (payload: TOrder) => {
+  const result = await Order.find(payload);
+  return result;
+};
 
 export const OrderServices = {
   createOrderIntoDB,
+  getAllOrdersFromDB,
 };

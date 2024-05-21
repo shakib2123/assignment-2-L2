@@ -23,7 +23,7 @@ const createProduct = async (req: Request, res: Response) => {
 const getAllProducts = async (req: Request, res: Response) => {
   try {
     const searchTerm = req.query.searchTerm;
-    const query: any = {};
+    let query: any = {};
 
     if (searchTerm) {
       query.$or = [
