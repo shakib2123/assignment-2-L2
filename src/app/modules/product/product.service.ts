@@ -5,8 +5,8 @@ const createProductIntoDB = async (payload: TProduct) => {
   const result = await Product.create(payload);
   return result;
 };
-const getAllProductFromDB = async () => {
-  const result = await Product.find();
+const getAllProductFromDB = async (query: any) => {
+  const result = await Product.find(query);
   return result;
 };
 const getSingleProductFromDB = async (id: string) => {
@@ -15,9 +15,13 @@ const getSingleProductFromDB = async (id: string) => {
 };
 const updateProductFromDB = async (id: string, payload: TProduct) => {
   const updateData = payload;
-  const result = await Product.findByIdAndUpdate({ _id: id }, updateData, {
-    new: true,
-  });
+  const result = await Product.findByIdAndUpdate(
+    { _id: id },
+    { $set: updateData },
+    {
+      new: true,
+    },
+  );
   return result;
 };
 const deleteProductFromDB = async (id: string) => {

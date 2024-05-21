@@ -22,13 +22,31 @@ const createProduct = async (req: Request, res: Response) => {
 };
 const getAllProducts = async (req: Request, res: Response) => {
   try {
-    const result = await ProductServices.getAllProductFromDB();
+    const searchTerm = req.query.searchTerm;
+    const query: any = {};
 
-    res.status(200).json({
-      success: true,
-      message: 'Products fetched successfully!',
-      data: result,
-    });
+    if (searchTerm) {
+      query.$or = [
+        { name: { $regex: searchTerm, $options: 'i' } },
+        { category: { $regex: searchTerm, $options: 'i' } },
+        { description: { $regex: searchTerm, $options: 'i' } },
+      ];
+    }
+    const result = await ProductServices.getAllProductFromDB(query);
+
+    if (!searchTerm) {
+      res.status(200).json({
+        success: true,
+        message: 'Products fetched successfully!',
+        data: result,
+      });
+    } else {
+      res.status(200).json({
+        success: true,
+        message: `Products matching search term '${searchTerm}' fetched successfully!`,
+        data: result,
+      });
+    }
   } catch (error: any) {
     res.status(500).json({
       success: false,
