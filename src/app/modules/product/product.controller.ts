@@ -13,11 +13,19 @@ const createProduct = async (req: Request, res: Response) => {
       data: result,
     });
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      message: error.issues[0].message || 'Something went wrong',
-      error: error,
-    });
+    if (error.issues && error.issues.length > 0 && error.issues[0].message) {
+      res.status(500).json({
+        success: false,
+        message: error.issues[0].message || 'Something went wrong',
+        error: error,
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: error?.message || 'Something went wrong',
+        error: error,
+      });
+    }
   }
 };
 const getAllProducts = async (req: Request, res: Response) => {
@@ -91,17 +99,31 @@ const updateProduct = async (req: Request, res: Response) => {
     const zodParsedData = productValidationSchema.parse(updatedData);
     const result = await ProductServices.updateProductFromDB(id, zodParsedData);
 
+    if (!result) {
+      return res
+        .status(404)
+        .json({ success: false, message: 'Product not found' });
+    }
+
     res.status(200).json({
       success: true,
       message: 'Product updated successfully!',
       data: result,
     });
   } catch (error: any) {
-    res.status(500).json({
-      success: false,
-      message: error.issues[0].message || 'Something went wrong',
-      error: error,
-    });
+    if (error.issues && error.issues.length > 0 && error.issues[0].message) {
+      res.status(500).json({
+        success: false,
+        message: error.issues[0].message || 'Something went wrong',
+        error: error,
+      });
+    } else {
+      res.status(500).json({
+        success: false,
+        message: error?.message || 'Something went wrong',
+        error: error,
+      });
+    }
   }
 };
 const deleteProduct = async (req: Request, res: Response) => {
@@ -123,7 +145,7 @@ const deleteProduct = async (req: Request, res: Response) => {
   } catch (error: any) {
     res.status(500).json({
       success: false,
-      message: error.issues[0].message || 'Something went wrong',
+      message: error?.message || 'Something went wrong',
       error: error,
     });
   }
