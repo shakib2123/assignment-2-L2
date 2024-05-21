@@ -75,10 +75,35 @@ const updateProduct = async (req: Request, res: Response) => {
     });
   }
 };
+const deleteProduct = async (req: Request, res: Response) => {
+  try {
+    const id = req.params.productId;
+    const result = await ProductServices.deleteProductFromDB(id);
+
+    if (!result) {
+      return res
+        .status(404)
+        .json({ success: false, message: 'Product not found' });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: 'Product deleted successfully!',
+      data: null,
+    });
+  } catch (error: any) {
+    res.status(500).json({
+      success: false,
+      message: error.issues[0].message || 'Something went wrong',
+      error: error,
+    });
+  }
+};
 
 export const ProductControllers = {
   createProduct,
   getAllProducts,
   getSingleProduct,
   updateProduct,
+  deleteProduct,
 };
