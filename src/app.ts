@@ -19,7 +19,7 @@ app.use('/api/orders', OrderRoutes);
 
 //Handle the root route
 app.get('/', (req, res) => {
-  res.send('Assignment server is running!');
+  res.json({ message: 'Welcome To Ecommerce API Service!' });
 });
 
 //Handle any other route and return a 404 error
