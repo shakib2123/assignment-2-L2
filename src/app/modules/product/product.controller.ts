@@ -3,7 +3,7 @@ import { ProductServices } from './product.service';
 import { productValidationSchema } from './product.validation';
 
 //Create a new product in the database
-const createProduct = async (req: Request, res: Response) => {
+const createProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     // Validate the product data using Zod
     const zodParsedData = productValidationSchema.parse(req.body);
@@ -37,10 +37,10 @@ const createProduct = async (req: Request, res: Response) => {
 };
 
 // Fetch all products from the database
-const getAllProducts = async (req: Request, res: Response) => {
+const getAllProducts = async (req: Request, res: Response): Promise<void> => {
   try {
     const searchTerm = req.query.searchTerm;
-    let query: any = {};
+    const query: any = {};
 
     // If the search term is provided, create a query to search for products
     // based on their name, category, and description
@@ -57,9 +57,8 @@ const getAllProducts = async (req: Request, res: Response) => {
 
     // If no products are found, return a 404 status code
     if (!result || result.length === 0) {
-      return res
-        .status(404)
-        .json({ success: false, message: 'Product not found' });
+      res.status(404).json({ success: false, message: 'Product not found' });
+      return;
     }
 
     // If no search term is provided, return all products
@@ -88,7 +87,7 @@ const getAllProducts = async (req: Request, res: Response) => {
 };
 // Get a single product by id from the database
 
-const getSingleProduct = async (req: Request, res: Response) => {
+const getSingleProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const id = req.params.productId;
     // Fetch the product with the given id from the database
@@ -96,9 +95,8 @@ const getSingleProduct = async (req: Request, res: Response) => {
 
     if (!result) {
       // If the product is not found, return a 404 status code
-      return res
-        .status(404)
-        .json({ success: false, message: 'Product not found' });
+      res.status(404).json({ success: false, message: 'Product not found' });
+      return;
     }
 
     // If the product is found, return it in the response
@@ -118,7 +116,7 @@ const getSingleProduct = async (req: Request, res: Response) => {
 };
 
 //Updates a product in the database with the given id and updated data
-const updateProduct = async (req: Request, res: Response) => {
+const updateProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const id = req.params.productId;
     const updatedData = req.body;
@@ -129,9 +127,8 @@ const updateProduct = async (req: Request, res: Response) => {
 
     if (!result) {
       // If the product is not found, return a 404 status code
-      return res
-        .status(404)
-        .json({ success: false, message: 'Product not found' });
+      res.status(404).json({ success: false, message: 'Product not found' });
+      return;
     }
 
     // Return the updated product in the response
@@ -159,7 +156,7 @@ const updateProduct = async (req: Request, res: Response) => {
   }
 };
 //Delete a product from the database with the given id
-const deleteProduct = async (req: Request, res: Response) => {
+const deleteProduct = async (req: Request, res: Response): Promise<void> => {
   try {
     const id = req.params.productId;
 
@@ -168,9 +165,8 @@ const deleteProduct = async (req: Request, res: Response) => {
 
     if (!result) {
       // If the product is not found, return a 404 status code
-      return res
-        .status(404)
-        .json({ success: false, message: 'Product not found' });
+      res.status(404).json({ success: false, message: 'Product not found' });
+      return;
     }
 
     // Return a 200 status code and a success message

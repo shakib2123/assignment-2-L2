@@ -4,27 +4,29 @@ import { orderValidationSchema } from './order.validation';
 import { Product } from '../product/product.model';
 
 //Create a new order in the database
-const createOrder = async (req: Request, res: Response) => {
+const createOrder = async (req: Request, res: Response): Promise<void> => {
   try {
     const payload = req.body;
 
     // Find the product with the given id
     const product = await Product.findById(payload.productId);
     if (!product) {
-      return res.status(404).json({
+      res.status(404).json({
         success: false,
         message: 'Product not found',
       });
+      return;
     }
     // Check if the ordered quantity exceeds the available quantity
     if (
       product.inventory.quantity < payload.quantity ||
       !product.inventory.inStock
     ) {
-      return res.status(400).json({
+      res.status(400).json({
         success: false,
         message: 'Insufficient quantity available in inventory',
       });
+      return;
     }
     // Update the inventory quantity and inStock status
     product.inventory.quantity -= payload.quantity;
@@ -60,7 +62,7 @@ const createOrder = async (req: Request, res: Response) => {
 };
 
 //Fetch all orders from the database
-const getAllOrders = async (req: Request, res: Response) => {
+const getAllOrders = async (req: Request, res: Response): Promise<void> => {
   try {
     // The query to filter orders by email
     let query: any = {};
@@ -75,9 +77,8 @@ const getAllOrders = async (req: Request, res: Response) => {
     const result = await OrderServices.getAllOrdersFromDB(query);
 
     if (!result || result.length === 0) {
-      return res
-        .status(404)
-        .json({ success: false, message: 'Order not found' });
+      res.status(404).json({ success: false, message: 'Order not found' });
+      return;
     }
 
     if (!email) {
