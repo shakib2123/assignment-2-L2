@@ -1,7 +1,5 @@
 # E-commerce API Application
 
----
-
 ## 🤖 Introduction
 
 This project is an E-commerce API built with Express and TypeScript, integrated with MongoDB using Mongoose for effective data management. It ensures data integrity through validation using Zod.
@@ -30,8 +28,6 @@ This project is an E-commerce API built with Express and TypeScript, integrated 
 - 👉 **Create a New Order:** Implement an endpoint to place new orders, including details such as user email, product ID, price, and quantity.
 - 👉 **Retrieve All Orders:** Implement an endpoint to fetch all orders, providing details about each order.
 - 👉 **Retrieve Orders by User Email:** Implement an endpoint to fetch orders based on the user's email, allowing users to view their order history.
-
----
 
 ## 🤸 Quick Start
 
@@ -82,8 +78,6 @@ npm run start:dev
 ```
 
 The server should be running on `http://localhost:5000`.
-
----
 
 ## Available API Endpoints 📌
 
