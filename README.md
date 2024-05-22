@@ -65,11 +65,6 @@ PORT=5000
 DB_URI="mongodb://localhost:27017/assignment-2"
 ```
 
-### 🛠️ Compile TypeScript
-
-```bash
-npm run build
-```
 
 ### 🚀 Start the Application
 
