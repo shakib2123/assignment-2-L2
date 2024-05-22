@@ -43,20 +43,20 @@ Make sure you have the following installed on your machine:
 - ✅ [**TypeScript**](https://www.typescriptlang.org/) installed
 - ✅ [**npm**](https://www.npmjs.com/) installed
 
-### Clone the Repository 📂
+### 📂 Clone the Repository
 
 ```bash
 git clone https://github.com/shakib2123/assignment-2-L2
 cd assignment-2-L2
 ```
 
-### Install Dependencies 📦
+### 📦 Install Dependencies
 
 ```bash
 npm install
 ```
 
-### Configure Environment Variables ⚙️
+### ⚙️ Configure Environment Variables
 
 Create a `.env` file in the root of the project and add the following environment variables:
 
@@ -65,13 +65,13 @@ PORT=5000
 DB_URI="mongodb://localhost:27017/assignment-2"
 ```
 
-### Compile TypeScript 🛠️
+### 🛠️ Compile TypeScript
 
 ```bash
 npm run build
 ```
 
-### Start the Application 🚀
+### 🚀 Start the Application
 
 ```bash
 npm run start:dev
@@ -79,9 +79,9 @@ npm run start:dev
 
 The server should be running on `http://localhost:5000`.
 
-## Available API Endpoints 📌
+## 📌 Available API Endpoints
 
-### Product Management 🛍️
+### 🛍️ Product Management
 
 #### 1. Create a New Product
 
@@ -113,7 +113,7 @@ The server should be running on `http://localhost:5000`.
 - **Endpoint:** `/api/products?searchTerm=iphone`
 - **Method:** `GET`
 
-### Order Management 🛒
+### 🛒 Order Management
 
 #### 1. Create a New Order
 
@@ -130,11 +130,11 @@ The server should be running on `http://localhost:5000`.
 - **Endpoint**: `/api/orders?email=level2@programming-hero.com`
 - **Method**: `GET`
 
-## Validation and Error Handling ⚠️
+## ⚠️ Validation and Error Handling
 
 The application uses Zod for validation of incoming data for product and order creation and updating operations. Validation errors and other errors are handled gracefully, providing meaningful error messages in the API responses.
 
-## Linting 🧹
+## 🧹 Linting
 
 Ensure the code adheres to a consistent style by running:
 
@@ -142,7 +142,7 @@ Ensure the code adheres to a consistent style by running:
 npm run lint
 ```
 
-## Linting Fix 🧹
+## 🧹 Linting Fix
 
 Fix the code by running:
 
@@ -150,7 +150,7 @@ Fix the code by running:
 npm run lint:fix
 ```
 
-## Formatting 🧹
+## 🧹 Formatting
 
 Format the code by running:
 
@@ -158,7 +158,7 @@ Format the code by running:
 npm run prettier
 ```
 
-## Contact 📧
+## 📧 Contact
 
 If you have any questions or need further assistance, please contact mshakibalhasan21@gmail.com.
 
