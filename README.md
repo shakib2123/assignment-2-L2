@@ -145,13 +145,7 @@ Fix the code by running:
 npm run lint:fix
 ```
 
-## 🧹 Formatting
 
-Format the code by running:
-
-```bash
-npm run prettier
-```
 
 ## 📧 Contact
 
