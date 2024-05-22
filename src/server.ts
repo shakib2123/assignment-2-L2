@@ -9,7 +9,7 @@ async function main(): Promise<void> {
     await mongoose.connect(config.db_url as string);
 
     // start the express server
-    app.listen(config.port, () => {
+    app.listen(process.env.PORT || config.port, () => {
       console.log(`app is listening on port ${config.port}`);
     });
   } catch (err) {

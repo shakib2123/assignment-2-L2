@@ -22,7 +22,7 @@ function main() {
             // connect to the database
             yield mongoose_1.default.connect(config_1.default.db_url);
             // start the express server
-            app_1.default.listen(config_1.default.port, () => {
+            app_1.default.listen(process.env.PORT || config_1.default.port, () => {
                 console.log(`app is listening on port ${config_1.default.port}`);
             });
         }
